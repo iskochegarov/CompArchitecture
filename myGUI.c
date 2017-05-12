@@ -171,6 +171,9 @@ void show_keys ()
     mt_gotoXY(48, 20);
     printf(" F6 - instructionCounter\n");
 
+    mt_gotoXY(48, 21);
+    printf(" q  - quit\n");
+
     printf("\n\n\n");
 
 }

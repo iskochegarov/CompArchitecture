@@ -109,25 +109,27 @@ int rk_mytermregime(int regime, int vtime, int vmin, int echo, int sigint)
         return -1;
 
     if (regime == 1)
-        options.c_lflag |= ICANON;
+        options.c_lflag |= ICANON; //канонический режим
     else
     if (regime == 0)
         options.c_lflag &= ~ICANON;
     else
         return -1;
     if (regime == 0)
-    {
-        options.c_cc[VTIME] = vtime;
-        options.c_cc[VMIN] = vmin;
+    {   //c_cc array defines the terminal special characters
+        options.c_cc[VTIME] = vtime; //Timeout in deciseconds for noncanonical read (TIME)
+        options.c_cc[VMIN] = vmin; //Minimum number of characters for noncanonical read (MIN)
+
         if (echo == 1)
-            options.c_lflag |= ECHO;
+            options.c_lflag |= ECHO; //input characters
         else
         if (echo == 0)
             options.c_lflag &= ~ECHO;
         else
             return -1;
+
         if (sigint == 1)
-            options.c_lflag |= ISIG;
+            options.c_lflag |= ISIG; //When any of the characters INTR, QUIT, SUSP, or DSUSP arereceived, generate the corresponding signal
         else
         if (sigint == 0)
             options.c_lflag &= ~ISIG;
