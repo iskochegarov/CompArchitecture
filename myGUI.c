@@ -111,13 +111,14 @@ void show_memory(int cursor)
     bc_box(1, 1, 12, 61);
     mt_gotoXY(27, 0);
     printf(" Memory \n");
-
+    int pos = 0;
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
+
             mt_gotoXY(j*5+2+j, i+2);
-            if (i  == cursor)
+            if (pos == cursor)
             {
                 mt_setbgColor(LightBlue);
                 mt_setfgColor(Black);
@@ -125,25 +126,9 @@ void show_memory(int cursor)
 
             printf("+%04X\n", mem[i*10+j]);
             color_reset();
+            pos++;
         }
     }
-
-
-    /*
-    for (int i = 0; i < 100; ++i)
-    {
-        if (i % 10 == 0)
-            mt_gotoXY(2, i/10+2);
-        if (i == cursor)
-        {
-            mt_setbgColor(LightBlue);
-            mt_setfgColor(Green);
-        }
-        printf("+%04X", mem[i]);
-        color_reset();
-        printf(" ");
-    }
-    */
 }
 
 void show_bigchars(int cursor)

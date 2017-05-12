@@ -60,8 +60,7 @@ int main ()
         else if (key == r)
         {
             sc_regSet(FLG_TICK_IGNORE, 0);
-            //signal(SIGINT, ic_reset);
-            //setitimer(ITIMER_REAL, &nval, &oval);
+            //Обработка прерываний
         }
 
         else if (key == i)
