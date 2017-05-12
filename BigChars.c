@@ -38,6 +38,7 @@ int bc_box (int x1, int y1, int x2, int y2)
     }
 
     bc_printA("j"); //правый нижний угол
+    return 0;
 }
 
 int bc_printbigchar(int *big, int x, int y, enum Colors fgcolor, enum Colors bgcolor)

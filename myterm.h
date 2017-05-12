@@ -1,3 +1,5 @@
+#ifndef MYTERM_H
+#define MYTERM_H
 
 enum Colors
 {
@@ -16,6 +18,5 @@ int mt_gotoXY(int X, int Y);
 int mt_getscreensize(int *rows, int *cols);
 int mt_setfgColor(enum Colors color);
 int mt_setbgColor(enum Colors color);
-//int mt_setbgColor(int color);
 
-
+#endif
