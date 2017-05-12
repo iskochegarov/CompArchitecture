@@ -1,7 +1,6 @@
 #include "BigChars.h"
 #include "memory.h"
-
-int ic = 0, ac = 0, cursor = 0;
+#include "myReadKey.h"
 
 int flg_state (int8_t regist)
 {
@@ -16,7 +15,7 @@ void color_reset ()
     mt_setfgColor(LightBlue);
 }
 
-void show_accumulator ()
+void show_accumulator (int ac)
 {
     char str[4];
     sprintf(str, "%04X", ac);
@@ -29,7 +28,7 @@ void show_accumulator ()
     printf("%s\n",str);
 }
 
-void show_ic ()
+void show_ic (int ic)
 {
     char str[4];
     sprintf(str, "%04X", ic);
@@ -42,7 +41,7 @@ void show_ic ()
     printf("%s\n", str);
 }
 
-void show_operation ()
+void show_operation (int cursor)
 {
     char str[8];
     sprintf(str, "+%04X", mem[cursor]);
@@ -106,18 +105,19 @@ void show_flags()
     color_reset();
 }
 
-void show_memory()
+void show_memory(int cursor)
 {
     color_reset();
     bc_box(1, 1, 12, 61);
     mt_gotoXY(27, 0);
     printf(" Memory \n");
+
     for (int i = 0; i < 10; i++)
     {
-        for (int j = 0; j<10; j++)
+        for (int j = 0; j < 10; j++)
         {
             mt_gotoXY(j*5+2+j, i+2);
-            if (i + j == cursor)
+            if (i  == cursor)
             {
                 mt_setbgColor(LightBlue);
                 mt_setfgColor(Black);
@@ -127,9 +127,26 @@ void show_memory()
             color_reset();
         }
     }
+
+
+    /*
+    for (int i = 0; i < 100; ++i)
+    {
+        if (i % 10 == 0)
+            mt_gotoXY(2, i/10+2);
+        if (i == cursor)
+        {
+            mt_setbgColor(LightBlue);
+            mt_setfgColor(Green);
+        }
+        printf("+%04X", mem[i]);
+        color_reset();
+        printf(" ");
+    }
+    */
 }
 
-void show_bigchars()
+void show_bigchars(int cursor)
 {
     char str[16];
     sprintf(str, "+%04X", mem[cursor]);
@@ -173,14 +190,14 @@ void show_keys ()
 
 }
 
-void refresh ()
+void refresh (int ac, int ic, int cursor)
 {
     mt_clrscr();
-    show_memory();
-    show_bigchars();
-    show_accumulator();
-    show_ic();
-    show_operation();
+    show_memory(cursor);
+    show_bigchars(cursor);
+    show_accumulator(ac);
+    show_ic(ic);
+    show_operation(cursor);
     show_flags();
     show_keys();
 }
