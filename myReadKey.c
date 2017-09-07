@@ -115,6 +115,7 @@ int rk_mytermregime(int regime, int vtime, int vmin, int echo, int sigint)
         options.c_lflag &= ~ICANON;
     else
         return -1;
+
     if (regime == 0)
     {   //c_cc array defines the terminal special characters
         options.c_cc[VTIME] = vtime; //Timeout in deciseconds for noncanonical read (TIME)
